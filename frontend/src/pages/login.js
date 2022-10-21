@@ -25,6 +25,28 @@ const handleSubmit = async e => {
   setToken(token)
 }
 
+useEffect( () => {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const codeParam = urlParams.get("code");
+
+  async function getAccessToken() {
+    await fetch("http://localhost:5000/getAccessToken/?code="+ codeParam, {
+      method: "GET"
+    }).then((response) => {
+      return response.json()
+    }).then((data) => {
+      if(data.access_token) {
+        localStorage.setItem("accessToken", data.access_token);
+        setToken(data.access_token)
+      }
+
+    })
+  }
+
+  getAccessToken();
+}, [])
+
 
 
   //forward the user to github login screen
@@ -33,7 +55,7 @@ const handleSubmit = async e => {
   }
 
   return (
-    <button onClick={handleSubmit}>
+    <button onClick={loginWithGithub}>
       Login with Github
     </button>
   )

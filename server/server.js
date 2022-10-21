@@ -37,7 +37,6 @@ app.get('/getAccessToken', async function(req, res) {
             "Accept": "application/json"
         }
     }).then((response) => {
-        console.log(response)
         return response.json()
     }).then((data) => {
         console.log(data)

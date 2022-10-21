@@ -5,7 +5,6 @@ import { Dashboard, Login } from './pages';
 
 const CLIENT_ID = process.env.REACT_APP_GITHUB_CLIENT_ID;
 
-
   
 function App() {
   const [token, setToken] = useState( () => {
@@ -16,8 +15,8 @@ function App() {
     localStorage.setItem("accessToken", JSON.stringify(token))
   }, [token])
 
-    console.log( token )
-  if ( !token) {
+
+  if ( ! token) {
     return <Login setToken={setToken} />
   }
 
